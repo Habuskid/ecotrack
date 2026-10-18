@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Report Review | EcoTrack</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Admin Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a class="eco-brand" href="/admin/dashboard.html">
+          <span class="eco-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span>EcoTrack <span class="badge bg-primary fs-6 py-0 px-1">Admin</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-label">Operations</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/dashboard.html">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link active" href="/admin/reports.html">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>Manage Reports</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/collections.html">
+              <i class="bi bi-truck"></i>
+              <span>Collections</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/categories.html">
+              <i class="bi bi-tags"></i>
+              <span>Categories</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/users.html">
+              <i class="bi bi-people"></i>
+              <span>User Directory</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-label">Session</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/dashboard.html">
+              <i class="bi bi-box-arrow-up-right"></i>
+              <span>Citizen View</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link text-danger" href="#" id="btn-logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span>Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="avatar-circle user-display-initial bg-primary">A</div>
+          <div class="overflow-hidden">
+            <div class="user-mini-name user-display-name text-truncate">Administrator</div>
+            <div class="user-mini-role user-display-role text-primary fw-semibold">Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="bi bi-list"></i>
+          </button>
+          <a href="/admin/reports.html" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Back to Reports
+          </a>
+          <h1 class="topbar-title">Review Report #<span id="detail-id">—</span></h1>
+        </div>
+
+        <div id="detail-status-badge">
+          <!-- Populated by JS -->
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="app-body">
+        <div id="report-details-container">
+          <div class="row g-4">
+            <!-- Left Column: Photo & Details -->
+            <div class="col-lg-7">
+              <div class="eco-card p-4 mb-4">
+                <div class="mb-3 text-center bg-light rounded p-2">
+                  <img id="detail-image" src="" alt="Waste Incident Photo" 
+                       class="img-fluid rounded border shadow-sm" style="max-height: 400px; object-fit: contain;">
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="text-muted small fw-semibold text-uppercase">Waste Category</label>
+                    <div class="fs-5 fw-bold text-eco-primary" id="detail-category">—</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="text-muted small fw-semibold text-uppercase">Submission Date</label>
+                    <div class="text-dark" id="detail-date">—</div>
+                  </div>
+                  <div class="col-12">
+                    <label class="text-muted small fw-semibold text-uppercase">Reporter Details</label>
+                    <div class="d-flex align-items-center gap-2 p-2 bg-light rounded border">
+                      <i class="bi bi-person-circle fs-4 text-secondary"></i>
+                      <div>
+                        <div class="fw-semibold" id="detail-reporter-name">—</div>
+                        <div class="small text-muted" id="detail-reporter-email">—</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="text-muted small fw-semibold text-uppercase">Location / Address</label>
+                    <div class="d-flex align-items-center gap-2">
+                      <i class="bi bi-geo-alt-fill text-danger"></i>
+                      <span id="detail-location" class="fw-semibold">—</span>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="text-muted small fw-semibold text-uppercase">Citizen Description</label>
+                    <p id="detail-description" class="mb-0 bg-light p-3 rounded border text-secondary"></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Admin Note Editor -->
+              <div class="eco-card p-4">
+                <h6 class="fw-bold mb-2">
+                  <i class="bi bi-pencil-square text-eco-primary me-2"></i>Official Admin Note
+                </h6>
+                <p class="small text-muted mb-3">Add internal or citizen-facing instructions for this report.</p>
+                <div class="input-group">
+                  <input type="text" id="input-admin-note" class="form-control" placeholder="e.g. Dispatched truck #3; verified clean pickup.">
+                  <button type="button" id="btn-save-admin-note" class="btn btn-eco-primary">
+                    <i class="bi bi-check-lg me-1"></i>Save Note
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Actions, Collection, & Audit Timeline -->
+            <div class="col-lg-5">
+              <!-- Workflow Actions Card -->
+              <div class="eco-card p-4 mb-4 border-eco">
+                <h6 class="fw-bold text-dark mb-3">
+                  <i class="bi bi-signpost-split text-eco-primary me-2"></i>Workflow Actions
+                </h6>
+                <div id="admin-action-buttons" class="d-flex flex-column gap-2">
+                  <!-- Dynamically rendered based on report status -->
+                </div>
+              </div>
+
+              <!-- Scheduled Collection Details -->
+              <div id="detail-collection-card" class="eco-card p-4 mb-4 border-primary bg-light d-none">
+                <h6 class="fw-bold text-primary mb-3">
+                  <i class="bi bi-truck me-2"></i>Collection Assignment
+                </h6>
+                <div class="mb-2">
+                  <span class="text-muted small">Pickup Date:</span>
+                  <div class="fw-bold" id="collection-date">—</div>
+                </div>
+                <div class="mb-2">
+                  <span class="text-muted small">Completed At:</span>
+                  <div class="fw-semibold" id="collection-completed">—</div>
+                </div>
+                <div>
+                  <span class="text-muted small">Collection Notes:</span>
+                  <div class="small text-muted" id="collection-notes">—</div>
+                </div>
+              </div>
+
+              <!-- Status Workflow Timeline History -->
+              <div class="eco-card p-4">
+                <h6 class="fw-bold text-dark mb-3">
+                  <i class="bi bi-clock-history text-eco-primary me-2"></i>Status Change Audit Log
+                </h6>
+                <div id="detail-timeline" class="timeline">
+                  <!-- Populated by reports.js -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/reports.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const reportId = urlParams.get('id');
+      if (!reportId) return;
+
+      // Fetch report to render admin actions
+      try {
+        const res = await fetch(`/api/reports/${reportId}`);
+        const json = await res.json();
+        if (json.success && json.data) {
+          const report = json.data;
+          const container = document.getElementById('admin-action-buttons');
+          const noteInput = document.getElementById('input-admin-note');
+          if (noteInput && report.admin_note) {
+            noteInput.value = report.admin_note;
+          }
+
+          let actionHtml = '';
+          if (report.status === 'Pending') {
+            actionHtml = `
+              <button class="btn btn-primary btn-do-transition" data-status="Approved">
+                <i class="bi bi-check2-circle me-1"></i>Approve Report
+              </button>
+              <button class="btn btn-outline-danger btn-do-transition" data-status="Rejected">
+                <i class="bi bi-x-circle me-1"></i>Reject Report
+              </button>
+            `;
+          } else if (report.status === 'Approved') {
+            actionHtml = `
+              <a href="/admin/collections.html" class="btn btn-success">
+                <i class="bi bi-calendar-plus me-1"></i>Schedule Collection
+              </a>
+              <button class="btn btn-outline-primary btn-do-transition" data-status="In Progress">
+                <i class="bi bi-arrow-repeat me-1"></i>Advance to In Progress
+              </button>
+              <button class="btn btn-outline-danger btn-do-transition" data-status="Rejected">
+                <i class="bi bi-x-circle me-1"></i>Reject Report
+              </button>
+            `;
+          } else if (report.status === 'In Progress') {
+            actionHtml = `
+              <button class="btn btn-success btn-do-transition" data-status="Collected">
+                <i class="bi bi-check-all me-1"></i>Mark Collection Complete
+              </button>
+            `;
+          } else if (report.status === 'Collected') {
+            actionHtml = `
+              <div class="alert alert-success py-2 px-3 small mb-0">
+                <i class="bi bi-check-circle me-1"></i>This waste incident has been fully collected and resolved.
+              </div>
+            `;
+          } else if (report.status === 'Rejected') {
+            actionHtml = `
+              <button class="btn btn-outline-secondary btn-do-transition" data-status="Pending">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Reopen as Pending
+              </button>
+            `;
+          }
+          container.innerHTML = actionHtml;
+
+          // Attach transition click handlers
+          document.querySelectorAll('.btn-do-transition').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const targetStatus = btn.getAttribute('data-status');
+              const note = prompt(`Enter note for setting status to '${targetStatus}':`, `Updated by admin`);
+              if (note === null) return;
+
+              try {
+                const trRes = await fetch(`/api/admin/reports/${reportId}/status`, {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ status: targetStatus, note })
+                });
+                const trJson = await trRes.json();
+                if (trJson.success) {
+                  showToast(trJson.message, 'success');
+                  setTimeout(() => window.location.reload(), 800);
+                } else {
+                  showToast(trJson.message || 'Transition rejected.', 'error');
+                }
+              } catch (e) {
+                showToast('Network error during transition.', 'error');
+              }
+            });
+          });
+        }
+      } catch (err) {
+        console.error('Admin details error:', err);
+      }
+
+      // Save admin note
+      document.getElementById('btn-save-admin-note').addEventListener('click', async () => {
+        const note = document.getElementById('input-admin-note').value.trim();
+        try {
+          const res = await fetch(`/api/admin/reports/${reportId}/note`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ note })
+          });
+          const json = await res.json();
+          if (json.success) {
+            showToast('Admin note saved.', 'success');
+          } else {
+            showToast('Failed to save note.', 'error');
+          }
+        } catch (e) {
+          showToast('Network error saving note.', 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

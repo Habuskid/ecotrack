@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | EcoTrack Operations</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <!-- Stylesheets -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout" id="admin-dashboard-container">
+    <!-- Admin Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a class="eco-brand" href="/admin/dashboard.html">
+          <span class="eco-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span>EcoTrack <span class="badge bg-primary fs-6 py-0 px-1">Admin</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-label">Operations</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link active" href="/admin/dashboard.html">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/reports.html">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>Manage Reports</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/collections.html">
+              <i class="bi bi-truck"></i>
+              <span>Collections</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/categories.html">
+              <i class="bi bi-tags"></i>
+              <span>Categories</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/users.html">
+              <i class="bi bi-people"></i>
+              <span>User Directory</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-label">Session</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/dashboard.html">
+              <i class="bi bi-box-arrow-up-right"></i>
+              <span>Switch to Citizen View</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link text-danger" href="#" id="btn-logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span>Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="avatar-circle user-display-initial bg-primary">A</div>
+          <div class="overflow-hidden">
+            <div class="user-mini-name user-display-name text-truncate">Administrator</div>
+            <div class="user-mini-role user-display-role text-primary fw-semibold">Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="topbar-title">Municipal Operations Overview</h1>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-light text-muted border px-2 py-1">
+            <i class="bi bi-circle-fill text-success me-1" style="font-size: 0.5rem;"></i>MySQL Active
+          </span>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="app-body">
+        <!-- Overview Counters -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-lg">
+            <div class="stat-card">
+              <div>
+                <div class="stat-title">Registered Citizens</div>
+                <div class="stat-value" id="admin-stat-users">0</div>
+              </div>
+              <div class="stat-icon stat-icon-green">
+                <i class="bi bi-people"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg">
+            <div class="stat-card">
+              <div>
+                <div class="stat-title">Total Incidents</div>
+                <div class="stat-value" id="admin-stat-reports">0</div>
+              </div>
+              <div class="stat-icon stat-icon-blue">
+                <i class="bi bi-journal-text"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg">
+            <div class="stat-card">
+              <div>
+                <div class="stat-title">Pending Review</div>
+                <div class="stat-value" id="admin-stat-pending">0</div>
+              </div>
+              <div class="stat-icon stat-icon-amber">
+                <i class="bi bi-hourglass"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg">
+            <div class="stat-card">
+              <div>
+                <div class="stat-title">In Progress</div>
+                <div class="stat-value" id="admin-stat-inprogress">0</div>
+              </div>
+              <div class="stat-icon stat-icon-purple">
+                <i class="bi bi-arrow-repeat"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg">
+            <div class="stat-card">
+              <div>
+                <div class="stat-title">Collected</div>
+                <div class="stat-value text-success" id="admin-stat-collected">0</div>
+              </div>
+              <div class="stat-icon stat-icon-green">
+                <i class="bi bi-check2-circle"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Analytics Charts (Chart.js) -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-6">
+            <div class="eco-card p-4 h-100">
+              <h6 class="fw-bold text-dark mb-1">
+                <i class="bi bi-pie-chart text-eco-primary me-2"></i>Reports by Waste Category
+              </h6>
+              <p class="small text-muted mb-3">Live distribution from MySQL waste_categories.</p>
+              <div style="position: relative; height: 260px;">
+                <canvas id="chart-reports-by-category"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="eco-card p-4 h-100">
+              <h6 class="fw-bold text-dark mb-1">
+                <i class="bi bi-bar-chart-line text-eco-primary me-2"></i>Reports by Workflow Status
+              </h6>
+              <p class="small text-muted mb-3">Incident counts across progression stages.</p>
+              <div style="position: relative; height: 260px;">
+                <canvas id="chart-reports-by-status"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Incidents & New Users Tables -->
+        <div class="row g-4">
+          <!-- Recent Reports -->
+          <div class="col-lg-7">
+            <div class="eco-card">
+              <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+                <h6 class="fw-bold mb-0">Recent Waste Reports</h6>
+                <a href="/admin/reports.html" class="btn btn-sm btn-link text-eco-primary text-decoration-none p-0 fw-semibold">
+                  Manage All <i class="bi bi-chevron-right small"></i>
+                </a>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                  <thead class="table-light text-muted">
+                    <tr>
+                      <th>ID</th>
+                      <th>Reporter</th>
+                      <th>Category</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th class="text-end">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-recent-reports-body">
+                    <!-- Populated by admin.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Citizens -->
+          <div class="col-lg-5">
+            <div class="eco-card">
+              <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+                <h6 class="fw-bold mb-0">Recent User Registrations</h6>
+                <a href="/admin/users.html" class="btn btn-sm btn-link text-eco-primary text-decoration-none p-0 fw-semibold">
+                  Directory <i class="bi bi-chevron-right small"></i>
+                </a>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                  <thead class="table-light text-muted">
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Joined</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-recent-users-body">
+                    <!-- Populated by admin.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

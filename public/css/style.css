@@ -1,0 +1,353 @@
+/**
+ * EcoTrack — Main Global Stylesheet
+ */
+
+:root {
+  --primary-green: #15803D;
+  --primary-green-hover: #166534;
+  --secondary-green: #10B981;
+  --light-green: #ECFDF5;
+  --background-light: #F8FAFC;
+  --surface-white: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border-color: #E2E8F0;
+  --error-color: #DC2626;
+  --warning-color: #D97706;
+  --info-color: #0284C7;
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-light);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Primary Color Utilities */
+.text-eco-primary { color: var(--primary-green) !important; }
+.text-eco-secondary { color: var(--text-secondary) !important; }
+.bg-eco-primary { background-color: var(--primary-green) !important; color: white !important; }
+.bg-eco-light { background-color: var(--light-green) !important; }
+.border-eco { border-color: var(--border-color) !important; }
+
+/* Buttons */
+.btn-eco-primary {
+  background-color: var(--primary-green);
+  color: #ffffff;
+  border: 1px solid var(--primary-green);
+  font-weight: 500;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-eco-primary:hover, .btn-eco-primary:focus {
+  background-color: var(--primary-green-hover);
+  border-color: var(--primary-green-hover);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(21, 128, 61, 0.25);
+}
+
+.btn-eco-outline {
+  background-color: transparent;
+  color: var(--primary-green);
+  border: 1.5px solid var(--primary-green);
+  font-weight: 500;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-eco-outline:hover {
+  background-color: var(--light-green);
+  color: var(--primary-green);
+  border-color: var(--primary-green);
+}
+
+/* Navbar */
+.eco-navbar {
+  background-color: var(--surface-white);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.85rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  box-shadow: var(--shadow-sm);
+}
+
+.eco-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.eco-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background-color: var(--light-green);
+  border-radius: var(--radius-sm);
+  color: var(--primary-green);
+  font-size: 1.3rem;
+}
+
+.nav-link {
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-green) !important;
+}
+
+/* Cards */
+.eco-card {
+  background: var(--surface-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eco-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Badges */
+.badge-status {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-transform: capitalize;
+}
+
+.badge-pending {
+  background-color: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-approved {
+  background-color: #E0E7FF;
+  color: #3730A3;
+  border: 1px solid #C7D2FE;
+}
+
+.badge-in-progress {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
+}
+
+.badge-collected {
+  background-color: #DCFCE7;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+.badge-rejected {
+  background-color: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+.badge-active {
+  background-color: #DCFCE7;
+  color: #166534;
+}
+
+.badge-inactive {
+  background-color: #F1F5F9;
+  color: #64748B;
+}
+
+/* Toast Notification Container */
+#toast-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1090;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 380px;
+  width: 90%;
+}
+
+.eco-toast {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-green);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.1rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  animation: slideIn 0.25s ease-out;
+}
+
+.eco-toast.toast-error {
+  border-left-color: var(--error-color);
+}
+
+.eco-toast.toast-warning {
+  border-left-color: var(--warning-color);
+}
+
+.eco-toast.toast-info {
+  border-left-color: var(--info-color);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.empty-state-icon {
+  font-size: 3.5rem;
+  color: #CBD5E1;
+  margin-bottom: 1rem;
+}
+
+.empty-state-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F1F8F5 100%);
+  padding: 5rem 0 4rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--light-green);
+  color: var(--primary-green);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1.2rem;
+  border: 1px solid #A7F3D0;
+}
+
+.hero-title {
+  font-size: 2.85rem;
+  font-weight: 800;
+  line-height: 1.18;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+
+.hero-lead {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+/* Feature Item */
+.feature-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  background-color: var(--light-green);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-green);
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Footer */
+.eco-footer {
+  background-color: var(--surface-white);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0 1.5rem;
+  color: var(--text-secondary);
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+  color: var(--primary-green);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.15rem;
+  }
+  .hero-lead {
+    font-size: 1rem;
+  }
+  .hero-section {
+    padding: 3rem 0 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+}

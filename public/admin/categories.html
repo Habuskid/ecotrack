@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Waste Categories | EcoTrack Admin</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout" id="admin-categories-container">
+    <!-- Admin Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a class="eco-brand" href="/admin/dashboard.html">
+          <span class="eco-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span>EcoTrack <span class="badge bg-primary fs-6 py-0 px-1">Admin</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-label">Operations</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/dashboard.html">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/reports.html">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>Manage Reports</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/collections.html">
+              <i class="bi bi-truck"></i>
+              <span>Collections</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link active" href="/admin/categories.html">
+              <i class="bi bi-tags"></i>
+              <span>Categories</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/users.html">
+              <i class="bi bi-people"></i>
+              <span>User Directory</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-label">Session</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/dashboard.html">
+              <i class="bi bi-box-arrow-up-right"></i>
+              <span>Citizen View</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link text-danger" href="#" id="btn-logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span>Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="avatar-circle user-display-initial bg-primary">A</div>
+          <div class="overflow-hidden">
+            <div class="user-mini-name user-display-name text-truncate">Administrator</div>
+            <div class="user-mini-role user-display-role text-primary fw-semibold">Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="topbar-title">Waste Categories & Disposal Protocols</h1>
+        </div>
+
+        <div>
+          <button type="button" class="btn btn-eco-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-add-category">
+            <i class="bi bi-plus-lg me-1"></i>Add New Category
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="app-body">
+        <div class="eco-card">
+          <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+            <div>
+              <h6 class="fw-bold mb-0">Configured Waste Types</h6>
+              <div class="small text-muted">Used for AI recognition mapping and citizen reporting</div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light small text-muted">
+                <tr>
+                  <th>ID</th>
+                  <th>Category Name</th>
+                  <th>Description</th>
+                  <th>Disposal Protocol</th>
+                  <th>Status</th>
+                  <th>Total Reports</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="categories-table-body">
+                <!-- Dynamically populated by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div class="modal fade" id="modal-add-category" tabindex="-1" aria-labelledby="modalAddCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="modalAddCategoryLabel">Add Waste Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="form-add-category">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="cat-name" class="form-label">Category Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="cat-name" placeholder="e.g. E-Waste" required>
+            </div>
+            <div class="mb-3">
+              <label for="cat-description" class="form-label">Description</label>
+              <textarea class="form-control" id="cat-description" rows="2" placeholder="e.g. Broken electronics, batteries, circuit boards..."></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="cat-disposal" class="form-label">Disposal Method Recommendation <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="cat-disposal" rows="3" placeholder="e.g. Drop off at designated municipal hazardous waste collection center." required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-eco-primary">Save Category</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

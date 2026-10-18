@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Waste Identification | EcoTrack</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a class="eco-brand" href="/user/dashboard.html">
+          <span class="eco-brand-icon"><i class="bi bi-recycle"></i></span>
+          <span>EcoTrack</span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-label">Citizen Menu</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/dashboard.html">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link active" href="/user/identify-waste.html">
+              <i class="bi bi-cpu"></i>
+              <span>Identify Waste (AI)</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/report-waste.html">
+              <i class="bi bi-plus-circle"></i>
+              <span>Report Waste</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/my-reports.html">
+              <i class="bi bi-journal-text"></i>
+              <span>My Reports</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-label">Account</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/profile.html">
+              <i class="bi bi-person-gear"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link text-danger" href="#" id="btn-logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span>Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="avatar-circle user-display-initial">U</div>
+          <div class="overflow-hidden">
+            <div class="user-mini-name user-display-name text-truncate">Citizen User</div>
+            <div class="user-mini-role user-display-role">Citizen</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="topbar-title">AI Waste Identification</h1>
+        </div>
+
+        <div>
+          <a href="/user/report-waste.html" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-pencil-square me-1"></i>Skip to Manual Report
+          </a>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="app-body">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="eco-card p-4 p-md-5">
+              <div class="text-center mb-4">
+                <span class="badge bg-eco-light text-eco-primary px-3 py-2 fw-semibold mb-2">
+                  <i class="bi bi-magic me-1"></i>Computer Vision
+                </span>
+                <h3 class="fw-bold mb-2">Identify Recyclable Waste</h3>
+                <p class="text-muted small max-w-600 mx-auto">
+                  Take a photo or upload an image of a waste item. Our AI classifier checks the item against standard recyclable categories: <strong>Plastic, Paper, Metal, Glass,</strong> or <strong>Organic Waste</strong>.
+                </p>
+              </div>
+
+              <!-- Upload Area / Dropzone -->
+              <div id="recognition-dropzone" class="upload-dropzone mb-3">
+                <i class="bi bi-cloud-arrow-up dropzone-icon"></i>
+                <h5 class="fw-semibold mb-1">Click to Upload or Drag & Drop</h5>
+                <p class="text-muted small mb-3">Supports JPG, PNG, and WebP (Up to 5MB)</p>
+                <div class="d-flex justify-content-center gap-2">
+                  <button type="button" class="btn btn-eco-outline btn-sm" onclick="event.stopPropagation(); document.getElementById('waste-file-input').click();">
+                    <i class="bi bi-folder2-open me-1"></i>Browse Files
+                  </button>
+                  <button type="button" class="btn btn-light btn-sm border" id="btn-camera-trigger">
+                    <i class="bi bi-camera me-1"></i>Use Camera
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hidden File Inputs -->
+              <input type="file" id="waste-file-input" class="d-none" accept="image/jpeg,image/png,image/webp">
+              <input type="file" id="waste-camera-input" class="d-none" accept="image/*" capture="environment">
+
+              <!-- Image Preview Container -->
+              <div id="recognition-preview-container" class="preview-container d-none">
+                <img id="recognition-preview-img" src="" alt="Waste Image Preview" class="preview-img">
+                <button type="button" id="btn-remove-recognition-preview" class="btn-remove-preview" title="Remove image">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+
+              <!-- Action Button -->
+              <div class="text-center mt-3">
+                <button type="button" id="btn-analyze-waste" class="btn btn-eco-primary btn-lg px-5 d-none">
+                  <i class="bi bi-cpu me-2"></i>Analyze Waste Item
+                </button>
+              </div>
+
+              <!-- Loading State -->
+              <div id="recognition-loading" class="text-center py-4 d-none">
+                <div class="spinner-border text-success mb-3" style="width: 3rem; height: 3rem;" role="status">
+                  <span class="visually-hidden">Analyzing image...</span>
+                </div>
+                <h5 class="fw-bold">Analyzing image features...</h5>
+                <p class="text-muted small">Inspecting texture, shape, and material contours.</p>
+              </div>
+
+              <!-- Genuine Prediction Result Card -->
+              <div id="recognition-result-card" class="mt-4 p-4 rounded border bg-light d-none">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                    <h5 class="fw-bold mb-0">Identified: <span id="result-category-name" class="text-eco-primary">Plastic</span></h5>
+                  </div>
+                  <span id="result-confidence-badge" class="badge badge-collected fs-6">92% Confidence</span>
+                </div>
+
+                <div class="mb-3">
+                  <label class="fw-semibold small text-muted text-uppercase">Analysis Findings</label>
+                  <p id="result-explanation" class="mb-0 text-dark small"></p>
+                </div>
+
+                <div class="mb-4 p-3 bg-white rounded border">
+                  <div class="fw-semibold text-eco-primary small mb-1">
+                    <i class="bi bi-recycle me-1"></i>Recommended Disposal Method:
+                  </div>
+                  <div id="result-disposal-recommendation" class="small text-muted"></div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="#" id="btn-confirm-report" class="btn btn-eco-primary">
+                    <i class="bi bi-send-check me-1"></i>Confirm & File Waste Report
+                  </a>
+                  <a href="#" id="btn-change-manual" class="btn btn-outline-secondary">
+                    <i class="bi bi-pencil me-1"></i>Choose Category Manually
+                  </a>
+                </div>
+              </div>
+
+              <!-- Genuine Unavailable Alert Card (No Fake Predictions) -->
+              <div id="recognition-unavailable-card" class="mt-4 p-4 rounded border border-warning bg-light d-none">
+                <div class="d-flex gap-3 align-items-start">
+                  <i class="bi bi-info-circle-fill text-warning fs-3 mt-1"></i>
+                  <div>
+                    <h5 class="fw-bold text-dark mb-1">Recognition Notice</h5>
+                    <p id="unavailable-message-text" class="text-muted small mb-3">
+                      Waste recognition is currently unavailable. Please select the waste category manually.
+                    </p>
+                    <a href="#" id="btn-proceed-manual" class="btn btn-eco-primary btn-sm">
+                      <i class="bi bi-arrow-right me-1"></i>Proceed with Manual Selection
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/recognition.js"></script>
+</body>
+</html>

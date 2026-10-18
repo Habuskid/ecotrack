@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Collections | EcoTrack Admin</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout" id="admin-collections-container">
+    <!-- Admin Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a class="eco-brand" href="/admin/dashboard.html">
+          <span class="eco-brand-icon"><i class="bi bi-shield-check"></i></span>
+          <span>EcoTrack <span class="badge bg-primary fs-6 py-0 px-1">Admin</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-label">Operations</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/dashboard.html">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/reports.html">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>Manage Reports</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link active" href="/admin/collections.html">
+              <i class="bi bi-truck"></i>
+              <span>Collections</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/categories.html">
+              <i class="bi bi-tags"></i>
+              <span>Categories</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/users.html">
+              <i class="bi bi-people"></i>
+              <span>User Directory</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-label">Session</div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user/dashboard.html">
+              <i class="bi bi-box-arrow-up-right"></i>
+              <span>Citizen View</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link text-danger" href="#" id="btn-logout">
+              <i class="bi bi-box-arrow-left"></i>
+              <span>Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="avatar-circle user-display-initial bg-primary">A</div>
+          <div class="overflow-hidden">
+            <div class="user-mini-name user-display-name text-truncate">Administrator</div>
+            <div class="user-mini-role user-display-role text-primary fw-semibold">Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="topbar-title">Municipal Collection Management</h1>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="app-body">
+        <div class="eco-card p-3 mb-4">
+          <div class="row align-items-center g-3">
+            <div class="col-md-6">
+              <h6 class="fw-bold mb-1">Pickup Schedule & Logistics Overview</h6>
+              <p class="small text-muted mb-0">Manage pickup schedules for verified and approved community waste reports.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <select id="filter-collection-status" class="form-select form-select-sm d-inline-block w-auto">
+                <option value="all">All Stages (Approved, In Progress, Collected)</option>
+                <option value="Approved">Awaiting Schedule (Approved)</option>
+                <option value="In Progress">Scheduled / In Progress</option>
+                <option value="Collected">Completed Pickups</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collections Table -->
+        <div class="eco-card">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light small text-muted">
+                <tr>
+                  <th>Report ID</th>
+                  <th>Waste Type & Details</th>
+                  <th>Location</th>
+                  <th>Scheduled Pickup</th>
+                  <th>Stage</th>
+                  <th>Completed At</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="collections-table-body">
+                <!-- Populated dynamically via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Schedule Collection Modal -->
+  <div class="modal fade" id="modal-schedule-collection" tabindex="-1" aria-labelledby="modalScheduleLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="modalScheduleLabel">Schedule Municipal Pickup</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="form-schedule-collection">
+          <input type="hidden" id="sched-report-id">
+          <div class="modal-body">
+            <div class="alert alert-info py-2 small mb-3">
+              Scheduling for Report #<strong id="sched-report-id-display">—</strong>. This will advance status to <strong>In Progress</strong>.
+            </div>
+            <div class="mb-3">
+              <label for="sched-date" class="form-label">Scheduled Pickup Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control" id="sched-date" required>
+            </div>
+            <div class="mb-3">
+              <label for="sched-notes" class="form-label">Collection Instructions / Truck Notes</label>
+              <textarea class="form-control" id="sched-notes" rows="3" placeholder="e.g. Route B dispatch, bring heavy lifting gear for metal scraps..."></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-eco-primary">Confirm Schedule</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTrack — Smart Waste Management System</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg eco-navbar">
+    <div class="container">
+      <a class="eco-brand" href="/">
+        <span class="eco-brand-icon"><i class="bi bi-recycle"></i></span>
+        <span>EcoTrack</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2 mt-3 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#how-it-works">How It Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#awareness">Awareness</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-eco-outline btn-sm px-3" href="/login.html">
+              <i class="bi bi-box-arrow-in-right"></i> Log In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-eco-primary btn-sm px-3" href="/register.html">
+              <i class="bi bi-person-plus"></i> Get Started
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <div class="hero-tag">
+            <i class="bi bi-shield-check"></i> Smart Waste Management for a Cleaner Tomorrow.
+          </div>
+          <h1 class="hero-title">
+            Smarter Waste Management.<br>Cleaner Communities.
+          </h1>
+          <p class="hero-lead">
+            Identify waste, report disposal problems, and track collection activities with one simple, intelligent platform.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="/register.html" class="btn btn-eco-primary btn-lg">
+              <i class="bi bi-rocket-takeoff"></i> Get Started
+            </a>
+            <a href="#features" class="btn btn-eco-outline btn-lg">
+              <i class="bi bi-compass"></i> Explore Features
+            </a>
+          </div>
+
+          <!-- Real Database Statistics Pill -->
+          <div class="mt-4 pt-3 border-top border-eco">
+            <div class="row g-3 text-center text-md-start" id="public-stats-container">
+              <div class="col-4">
+                <div class="fs-4 fw-bold text-eco-primary" id="pub-stat-reports">—</div>
+                <div class="small text-muted">Reports Registered</div>
+              </div>
+              <div class="col-4">
+                <div class="fs-4 fw-bold text-eco-primary" id="pub-stat-collected">—</div>
+                <div class="small text-muted">Wastes Collected</div>
+              </div>
+              <div class="col-4">
+                <div class="fs-4 fw-bold text-eco-primary" id="pub-stat-citizens">—</div>
+                <div class="small text-muted">Active Citizens</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 text-center">
+          <div class="eco-card p-4 text-start shadow-lg border-0" style="background: white;">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-eco-light text-eco-primary px-3 py-2 fw-semibold">
+                <i class="bi bi-stars me-1"></i> Live Platform Overview
+              </span>
+              <span class="badge badge-collected">Active Operations</span>
+            </div>
+            <h5 class="fw-bold mb-2">Sustainable City Workflow</h5>
+            <p class="text-muted small mb-4">Empowering residents and municipal authorities to close the loop on community waste collection seamlessly.</p>
+            
+            <div class="list-group list-group-flush small">
+              <div class="list-group-item px-0 d-flex align-items-center gap-3">
+                <div class="stat-icon stat-icon-green flex-shrink-0" style="width: 36px; height: 36px; font-size: 1rem;">
+                  <i class="bi bi-camera"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Visual Waste Classification</div>
+                  <div class="text-muted">Direct category classification for recyclable materials.</div>
+                </div>
+              </div>
+              <div class="list-group-item px-0 d-flex align-items-center gap-3">
+                <div class="stat-icon stat-icon-blue flex-shrink-0" style="width: 36px; height: 36px; font-size: 1rem;">
+                  <i class="bi bi-geo-alt"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Geolocated Incident Reporting</div>
+                  <div class="text-muted">Instant notifications and status change history.</div>
+                </div>
+              </div>
+              <div class="list-group-item px-0 d-flex align-items-center gap-3">
+                <div class="stat-icon stat-icon-purple flex-shrink-0" style="width: 36px; height: 36px; font-size: 1rem;">
+                  <i class="bi bi-truck"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Scheduled Collection Oversight</div>
+                  <div class="text-muted">Transparent tracking until certified municipal pickup.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5">
+    <div class="container py-4">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="badge bg-eco-light text-eco-primary mb-2 px-3 py-2">System Highlights</span>
+        <h2 class="fw-bold">Four Pillars of Smart Waste Management</h2>
+        <p class="text-muted">Designed for academic clarity, robust municipal tracking, and citizen empowerment.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="eco-card p-4 h-100">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-robot"></i>
+            </div>
+            <h5 class="fw-bold mb-2">1. AI Waste Recognition</h5>
+            <p class="text-muted small mb-0">Identify Plastic, Paper, Metal, Glass, and Organic Waste with verified computer vision and immediate disposal guidance.</p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="eco-card p-4 h-100">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-send-exclamation"></i>
+            </div>
+            <h5 class="fw-bold mb-2">2. Waste Reporting</h5>
+            <p class="text-muted small mb-0">Quickly report overflowing dumpsters, roadside debris, and hazard spots with validated photo evidence and GPS location tags.</p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="eco-card p-4 h-100">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-truck-front"></i>
+            </div>
+            <h5 class="fw-bold mb-2">3. Collection Tracking</h5>
+            <p class="text-muted small mb-0">Transparent status progression through Pending, Approved, In Progress, and Collected states with a full audit log.</p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="eco-card p-4 h-100">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-tree"></i>
+            </div>
+            <h5 class="fw-bold mb-2">4. Environmental Awareness</h5>
+            <p class="text-muted small mb-0">Actionable recycling guides and category recommendations to divert waste from landfills and conserve urban ecosystems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-5 bg-white border-top border-bottom border-eco">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="badge bg-eco-light text-eco-primary mb-2 px-3 py-2">Workflow</span>
+        <h2 class="fw-bold">How EcoTrack Works in 4 Simple Steps</h2>
+        <p class="text-muted">A clear, verifiable lifecycle from citizen submission to disposal completion.</p>
+      </div>
+
+      <div class="row g-4 text-center">
+        <div class="col-md-6 col-lg-3">
+          <div class="p-3">
+            <div class="stat-icon stat-icon-green mx-auto mb-3" style="width: 56px; height: 56px;">
+              <span class="fw-bold fs-5">1</span>
+            </div>
+            <h5 class="fw-bold mb-2">Upload Waste Image</h5>
+            <p class="text-muted small">Snap a photo on your smartphone or upload an existing image from your files.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="p-3">
+            <div class="stat-icon stat-icon-blue mx-auto mb-3" style="width: 56px; height: 56px;">
+              <span class="fw-bold fs-5">2</span>
+            </div>
+            <h5 class="fw-bold mb-2">Identify the Category</h5>
+            <p class="text-muted small">Let the AI vision model classify material type or manually select the category.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="p-3">
+            <div class="stat-icon stat-icon-amber mx-auto mb-3" style="width: 56px; height: 56px;">
+              <span class="fw-bold fs-5">3</span>
+            </div>
+            <h5 class="fw-bold mb-2">Submit a Report</h5>
+            <p class="text-muted small">Add your location address and short description, then submit to municipal officers.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="p-3">
+            <div class="stat-icon stat-icon-purple mx-auto mb-3" style="width: 56px; height: 56px;">
+              <span class="fw-bold fs-5">4</span>
+            </div>
+            <h5 class="fw-bold mb-2">Track Collection</h5>
+            <p class="text-muted small">Follow the scheduled pickup in real-time until collection is verified and completed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Environmental Awareness Section -->
+  <section id="awareness" class="py-5">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="badge bg-eco-light text-eco-primary mb-2 px-3 py-2">Ecological Impact</span>
+          <h2 class="fw-bold mb-3">Why Proper Waste Segregation Matters</h2>
+          <p class="text-muted mb-4">
+            Unsorted municipal waste contaminates recyclable resources and overfills urban landfills. By reporting waste and sorting at the source, communities reduce greenhouse gas emissions and safeguard local waterways.
+          </p>
+
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex gap-3">
+              <i class="bi bi-check-circle-fill text-eco-primary fs-5 mt-1"></i>
+              <div>
+                <strong>Plastic & Packaging:</strong>
+                <span class="text-muted"> Rinsed plastic containers can be converted into industrial fibers and durable goods.</span>
+              </div>
+            </div>
+            <div class="d-flex gap-3">
+              <i class="bi bi-check-circle-fill text-eco-primary fs-5 mt-1"></i>
+              <div>
+                <strong>Paper & Cardboard:</strong>
+                <span class="text-muted"> Recycling 1 ton of paper saves 17 mature trees and 7,000 gallons of clean water.</span>
+              </div>
+            </div>
+            <div class="d-flex gap-3">
+              <i class="bi bi-check-circle-fill text-eco-primary fs-5 mt-1"></i>
+              <div>
+                <strong>Metals & Aluminum:</strong>
+                <span class="text-muted"> Aluminum cans are 100% recyclable infinitely, consuming 95% less energy than raw bauxite mining.</span>
+              </div>
+            </div>
+            <div class="d-flex gap-3">
+              <i class="bi bi-check-circle-fill text-eco-primary fs-5 mt-1"></i>
+              <div>
+                <strong>Organic Food Waste:</strong>
+                <span class="text-muted"> Diverting compostable scraps avoids anaerobic methane release and enriches community agriculture.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="eco-card p-4 p-md-5 border-eco" style="background: linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 100%);">
+            <h4 class="fw-bold mb-3 text-eco-primary">Ready to Keep Your City Clean?</h4>
+            <p class="text-muted mb-4">Join fellow citizens, report disposal hazards, and support scheduled municipal collection today.</p>
+            <div class="d-flex flex-column flex-sm-row gap-3">
+              <a href="/register.html" class="btn btn-eco-primary">
+                <i class="bi bi-person-plus"></i> Create Free Account
+              </a>
+              <a href="/login.html" class="btn btn-eco-outline">
+                <i class="bi bi-box-arrow-in-right"></i> Sign In to Portal
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="eco-footer">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-5">
+          <a class="eco-brand mb-2 d-inline-flex" href="/">
+            <span class="eco-brand-icon"><i class="bi bi-recycle"></i></span>
+            <span>EcoTrack</span>
+          </a>
+          <p class="small text-muted mb-3" style="max-width: 360px;">
+            EcoTrack is a final-year academic project implementing a full-stack smart waste management system with Node.js, Express, MySQL, and genuine computer vision integration.
+          </p>
+          <div class="small text-muted">
+            Designed for Academic Defense & Municipal Operations.
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h6 class="fw-bold text-dark mb-3">Citizen Portal</h6>
+          <a class="footer-link" href="/user/dashboard.html">Citizen Dashboard</a>
+          <a class="footer-link" href="/user/identify-waste.html">AI Waste Recognition</a>
+          <a class="footer-link" href="/user/report-waste.html">Submit Waste Report</a>
+          <a class="footer-link" href="/user/my-reports.html">Track My Reports</a>
+        </div>
+
+        <div class="col-6 col-lg-4">
+          <h6 class="fw-bold text-dark mb-3">Administration</h6>
+          <a class="footer-link" href="/login.html">Administrator Login</a>
+          <a class="footer-link" href="/admin/dashboard.html">Operations Dashboard</a>
+          <a class="footer-link" href="/admin/reports.html">Report Workflow Management</a>
+          <a class="footer-link" href="/admin/collections.html">Collection Scheduling</a>
+        </div>
+      </div>
+
+      <div class="pt-4 border-top border-eco text-center small text-muted">
+        &copy; 2026 EcoTrack — Smart Waste Management System. All rights reserved. Built for University Final-Year Project Defense.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App JS -->
+  <script src="/js/app.js"></script>
+  <script>
+    // Fetch live public database statistics
+    async function loadPublicStats() {
+      try {
+        const res = await fetch('/api/public/stats');
+        const json = await res.json();
+        if (json.success && json.data) {
+          const d = json.data;
+          document.getElementById('pub-stat-reports').textContent = d.totalReports;
+          document.getElementById('pub-stat-collected').textContent = d.collectedReports;
+          document.getElementById('pub-stat-citizens').textContent = d.activeCitizens;
+        }
+      } catch (e) {
+        console.warn('Could not load public stats:', e);
+      }
+    }
+    loadPublicStats();
+  </script>
+</body>
+</html>
